@@ -32,6 +32,7 @@
 typedef __int64 int64_t;
 #else
 #include <unistd.h>
+#include <stdint.h>
 #endif
 #include <limits.h>
 

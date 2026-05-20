@@ -39,6 +39,23 @@ ABC_NAMESPACE_IMPL_START
 #define unlink _unlink
 #else
 #include <unistd.h>
+#if defined(__APPLE__)
+#include <sys/time.h>
+#ifndef CLOCK_REALTIME
+#define CLOCK_REALTIME 0
+#endif
+#ifndef CLOCK_MONOTONIC
+#define CLOCK_MONOTONIC 0
+#endif
+static int abc_clock_gettime_compat(int clk_id, struct timespec *ts) {
+    struct timeval tv; (void)clk_id;
+    if (gettimeofday(&tv, NULL) != 0) return -1;
+    ts->tv_sec = tv.tv_sec; ts->tv_nsec = tv.tv_usec * 1000; return 0;
+}
+#ifndef clock_gettime
+#define clock_gettime abc_clock_gettime_compat
+#endif
+#endif
 #endif
 
 ////////////////////////////////////////////////////////////////////////

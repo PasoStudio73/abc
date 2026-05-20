@@ -46,6 +46,7 @@ ABC_NAMESPACE_IMPL_START
 #include <unistd.h>
 #endif
 #include <limits.h>
+#include <stdint.h>
 
 ////////////////////////////////////////////////////////////////////////
 ///                        DECLARATIONS                              ///
