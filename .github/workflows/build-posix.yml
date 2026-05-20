@@ -3,6 +3,7 @@ name: Build Posix
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
 
